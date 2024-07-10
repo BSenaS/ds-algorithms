@@ -76,29 +76,46 @@
 //Merge Sort(Recursion)
 //1.Arrayi 1 elemanı kalana kadar daha kücük parçalara böl.
 
-function mergeSort(arr) {
-  if (arr.length < 2) {
-    //Recursion için base condition
-    return arr;
-  }
-  const mid = Math.floor(arr.length / 2);
-  const leftArr = arr.slice(0, mid); // -> ortanca elemana kadar olan elemanları içerir
-  const rightArr = arr.slice(mid); //-> orta elemandan sonraki elemanları içerir (orta eleman dahil)
-  //Arrayi 1 elemanı kalan kadar bölüp, merge elemanına parse olarak veriyoruz.
-  return merge(mergeSort(leftArr), mergeSort(rightArr));
-}
+// function mergeSort(arr) {
+//   if (arr.length < 2) {
+//     //Recursion için base condition
+//     return arr;
+//   }
+//   const mid = Math.floor(arr.length / 2);
+//   const leftArr = arr.slice(0, mid); // -> ortanca elemana kadar olan elemanları içerir
+//   const rightArr = arr.slice(mid); //-> orta elemandan sonraki elemanları içerir (orta eleman dahil)
+//   //Arrayi 1 elemanı kalan kadar bölüp, merge elemanına parse olarak veriyoruz.
+//   return merge(mergeSort(leftArr), mergeSort(rightArr));
+// }
 
-//2.Aşama
-function merge(leftArr, rightArr) {
-  const sortedArr = [];
-  while (leftArr.length && rightArr.length) {
-    if (leftArr[0] <= rightArr[0]) {
-      sortedArr.push(leftArr.shift());
-    } else {
-      sortedArr.push(rightArr.shift());
+// //2.Aşama
+// function merge(leftArr, rightArr) {
+//   const sortedArr = [];
+//   while (leftArr.length && rightArr.length) {
+//     if (leftArr[0] <= rightArr[0]) {
+//       sortedArr.push(leftArr.shift());
+//     } else {
+//       sortedArr.push(rightArr.shift());
+//     }
+//   }
+//   return [...sortedArr, ...leftArr, ...rightArr];
+// }
+// const arr = [8, 20, -2, 4, -6];
+// console.log(mergeSort(arr));
+
+//CARTESIAN PRODUCT
+function cartesianProduct(arr1, arr2) {
+  const newArr = [];
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      let tempArr = [];
+      tempArr.push(arr1[i], arr2[j]);
+      newArr.push(tempArr);
     }
   }
-  return [...sortedArr, ...leftArr, ...rightArr];
+  return newArr;
 }
-const arr = [8, 20, -2, 4, -6];
-console.log(mergeSort(arr));
+
+const arr1 = [1, 2];
+const arr2 = [3, 4, 5];
+console.log(cartesianProduct(arr1, arr2));
