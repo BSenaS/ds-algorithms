@@ -48,27 +48,57 @@
 
 //QuickSort (Recursion?)
 
-function quickSort(arr) {
-  //Recursion için bir base condition gerek.
-  //Arrayin için de bir eleman kalınca condition devreye girer ve o eleman döner.
-  if (arr.length < 2) {
-    return arr;
-  }
-  let pivot = arr[arr.length - 1]; // -> arrayin son elemanını pivot olarak alırız.
-  let leftArr = []; //-> pivottan küçük elementler
-  let rightArr = []; //-> pivottan büyük elementler.
-  for (let i = 0; i < arr.length - 1; i++) {
-    if (arr[i] < pivot) {
-      leftArr.push(arr[i]);
-    } else {
-      rightArr.push(arr[i]);
-    }
-  }
-  return [...quickSort(leftArr), pivot, ...quickSort(rightArr)];
-}
+// function quickSort(arr) {
+//   //Recursion için bir base condition gerek.
+//   //Arrayin için de bir eleman kalınca condition devreye girer ve o eleman döner.
+//   if (arr.length < 2) {
+//     return arr;
+//   }
+//   let pivot = arr[arr.length - 1]; // -> arrayin son elemanını pivot olarak alırız.
+//   let leftArr = []; //-> pivottan küçük elementler
+//   let rightArr = []; //-> pivottan büyük elementler.
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     if (arr[i] < pivot) {
+//       leftArr.push(arr[i]);
+//     } else {
+//       rightArr.push(arr[i]);
+//     }
+//   }
+//   return [...quickSort(leftArr), pivot, ...quickSort(rightArr)];
+// }
 
-const arr = [8, 20, -2, 4, -6];
-console.log(quickSort(arr));
+// const arr = [8, 20, -2, 4, -6];
+// console.log(quickSort(arr));
 
 //Worst case -> Big-O => O(n^2)
 //Avg Case -> Big-O => O(nlogn)
+
+//Merge Sort(Recursion)
+//1.Arrayi 1 elemanı kalana kadar daha kücük parçalara böl.
+
+function mergeSort(arr) {
+  if (arr.length < 2) {
+    //Recursion için base condition
+    return arr;
+  }
+  const mid = Math.floor(arr.length / 2);
+  const leftArr = arr.slice(0, mid); // -> ortanca elemana kadar olan elemanları içerir
+  const rightArr = arr.slice(mid); //-> orta elemandan sonraki elemanları içerir (orta eleman dahil)
+  //Arrayi 1 elemanı kalan kadar bölüp, merge elemanına parse olarak veriyoruz.
+  return merge(mergeSort(leftArr), mergeSort(rightArr));
+}
+
+//2.Aşama
+function merge(leftArr, rightArr) {
+  const sortedArr = [];
+  while (leftArr.length && rightArr.length) {
+    if (leftArr[0] <= rightArr[0]) {
+      sortedArr.push(leftArr.shift());
+    } else {
+      sortedArr.push(rightArr.shift());
+    }
+  }
+  return [...sortedArr, ...leftArr, ...rightArr];
+}
+const arr = [8, 20, -2, 4, -6];
+console.log(mergeSort(arr));
