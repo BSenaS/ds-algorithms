@@ -104,18 +104,29 @@
 // console.log(mergeSort(arr));
 
 //CARTESIAN PRODUCT
-function cartesianProduct(arr1, arr2) {
-  const newArr = [];
-  for (let i = 0; i < arr1.length; i++) {
-    for (let j = 0; j < arr2.length; j++) {
-      let tempArr = [];
-      tempArr.push(arr1[i], arr2[j]);
-      newArr.push(tempArr);
-    }
+// function cartesianProduct(arr1, arr2) {
+//   const newArr = [];
+//   for (let i = 0; i < arr1.length; i++) {
+//     for (let j = 0; j < arr2.length; j++) {
+//       let tempArr = [];
+//       tempArr.push(arr1[i], arr2[j]);
+//       newArr.push(tempArr);
+//     }
+//   }
+//   return newArr;
+// }
+
+// const arr1 = [1, 2];
+// const arr2 = [3, 4, 5];
+// console.log(cartesianProduct(arr1, arr2));
+
+function climbinStairCase(n) {
+  const noOfWays = [1, 2];
+
+  for (let i = 2; i <= n; i++) {
+    noOfWays[i] = noOfWays[i - 1] + noOfWays[i - 2];
   }
-  return newArr;
+  return noOfWays[n - 1];
 }
 
-const arr1 = [1, 2];
-const arr2 = [3, 4, 5];
-console.log(cartesianProduct(arr1, arr2));
+console.log(climbinStairCase(5));
