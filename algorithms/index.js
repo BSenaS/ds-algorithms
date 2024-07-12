@@ -120,13 +120,144 @@
 // const arr2 = [3, 4, 5];
 // console.log(cartesianProduct(arr1, arr2));
 
-function climbinStairCase(n) {
-  const noOfWays = [1, 2];
+// function climbinStairCase(n) {
+//   const noOfWays = [1, 2];
 
-  for (let i = 2; i <= n; i++) {
-    noOfWays[i] = noOfWays[i - 1] + noOfWays[i - 2];
+//   for (let i = 2; i <= n; i++) {
+//     noOfWays[i] = noOfWays[i - 1] + noOfWays[i - 2];
+//   }
+//   return noOfWays[n - 1];
+// }
+
+// const object1 = {
+//   a: "somestring",
+//   b: 42,
+// };
+
+// for (const [key] of Object.entries(object1)) {
+//   console.log(`${key}`);
+// }
+
+//Map
+
+// const map1 = new Map();
+// map1.set("a", "1");
+// map1.set("b", "2");
+// map1.set("c", "3");
+// for (const [key, value] of map1) {
+//   console.log(`${key},${value}`);
+// }
+
+//Queue with Array impl.
+//FIFO -> FIRST IN , FIRST OUT
+
+// class Queue {
+//   //Class içerisinde bir arr init ederiz.
+//   constructor() {
+//     this.items = [];
+//   }
+
+//   //metodlar
+
+//   //1.enque -> arrayin sonuna element ekler.
+//   enqueue(element) {
+//     this.items.push(element);
+//   }
+
+//   //2.Arrayin başından elementi siler.
+//   dequeue(element) {
+//     return this.items.shift(element);
+//   }
+
+//   //3.isEmpty metod
+//   isEmpty() {
+//     return this.items.length === 0;
+//   }
+
+//   //4.peek, isEmpty(false) ise, arrayin ilk elementini döndürürüz. True ise null döndürürüz.
+//   peek() {
+//     if (!this.isEmpty) {
+//       return this.items[0];
+//     } else {
+//       return null;
+//     }
+//   }
+//   //5.arrayin uzunlugunu döndürürüz.
+//   size() {
+//     return this.items.length;
+//   }
+
+//   //6.Arrayin içerisindeki elemanları dön.
+//   print() {
+//     console.log(this.items.toString());
+//   }
+// }
+
+// const queue = new Queue();
+// console.log(queue.isEmpty());
+
+// queue.enqueue(10);
+// queue.enqueue(20);
+// queue.enqueue(30);
+
+// console.log(queue.size());
+// queue.print();
+
+// console.log(queue.dequeue());
+// queue.print();
+
+// Queue with Object impl.
+// FIFO -> FIRST IN , FIRST OU
+//Object impl. kullanma sebebimiz : enque ve deque arraylerde lineer Big-O ya sahip, obje de ise bunu Constant time complexitye çeviriyoruz.
+class Queue {
+  constructor() {
+    this.items = {};
+    //initializing two pointers.
+    this.rear = 0;
+    this.front = 0;
   }
-  return noOfWays[n - 1];
+
+  //Objelerde insertion order tutulmadığı için kendimiz tutmak zorundayız.
+  //enque -> list'in başına element ekler.
+  enqueue(element) {
+    this.items[this.rear] = element;
+    this.rear++;
+  }
+
+  //Baştan çıkarma yap, frontu'ı arttır [indexleme]
+  dequeue() {
+    const item = this.items[this.front];
+    delete this.items[this.front];
+    this.front++;
+    return item;
+  }
+
+  isEmpty() {
+    return this.rear - this.front === 0;
+  }
+
+  peek() {
+    return this.items[front];
+  }
+
+  size() {
+    return this.rear - this.front;
+  }
+
+  print() {
+    console.log(this.items);
+  }
 }
 
-console.log(climbinStairCase(5));
+const queue = new Queue();
+
+queue.enqueue(5);
+queue.enqueue(30);
+queue.enqueue(42);
+
+queue.print();
+queue.dequeue();
+queue.enqueue(55);
+queue.print();
+console.log(queue.isEmpty());
+console.log(queue.size());
