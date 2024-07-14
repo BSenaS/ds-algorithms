@@ -209,55 +209,119 @@
 // Queue with Object impl.
 // FIFO -> FIRST IN , FIRST OU
 //Object impl. kullanma sebebimiz : enque ve deque arraylerde lineer Big-O ya sahip, obje de ise bunu Constant time complexitye çeviriyoruz.
-class Queue {
-  constructor() {
-    this.items = {};
-    //initializing two pointers.
-    this.rear = 0;
-    this.front = 0;
-  }
+// class Queue {
+//   constructor() {
+//     this.items = {};
+//     //initializing two pointers.
+//     this.rear = 0;
+//     this.front = 0;
+//   }
 
-  //Objelerde insertion order tutulmadığı için kendimiz tutmak zorundayız.
-  //enque -> list'in başına element ekler.
-  enqueue(element) {
-    this.items[this.rear] = element;
-    this.rear++;
-  }
+//   //Objelerde insertion order tutulmadığı için kendimiz tutmak zorundayız.
+//   //enque -> list'in başına element ekler.
+//   enqueue(element) {
+//     this.items[this.rear] = element;
+//     this.rear++;
+//   }
 
-  //Baştan çıkarma yap, frontu'ı arttır [indexleme]
-  dequeue() {
-    const item = this.items[this.front];
-    delete this.items[this.front];
-    this.front++;
-    return item;
-  }
+//   //Baştan çıkarma yap, frontu'ı arttır [indexleme]
+//   dequeue() {
+//     const item = this.items[this.front];
+//     delete this.items[this.front];
+//     this.front++;
+//     return item;
+//   }
 
-  isEmpty() {
-    return this.rear - this.front === 0;
-  }
+//   isEmpty() {
+//     return this.rear - this.front === 0;
+//   }
 
-  peek() {
-    return this.items[front];
-  }
+//   peek() {
+//     return this.items[front];
+//   }
 
-  size() {
-    return this.rear - this.front;
-  }
+//   size() {
+//     return this.rear - this.front;
+//   }
 
-  print() {
-    console.log(this.items);
-  }
-}
+//   print() {
+//     console.log(this.items);
+//   }
+// }
 
-const queue = new Queue();
+// const queue = new Queue();
 
-queue.enqueue(5);
-queue.enqueue(30);
-queue.enqueue(42);
+// queue.enqueue(5);
+// queue.enqueue(30);
+// queue.enqueue(42);
 
-queue.print();
-queue.dequeue();
-queue.enqueue(55);
-queue.print();
-console.log(queue.isEmpty());
-console.log(queue.size());
+// queue.print();
+// queue.dequeue();
+// queue.enqueue(55);
+// queue.print();
+// console.log(queue.isEmpty());
+// console.log(queue.size());
+
+//Eğer fix size quelar ile uğraşıyorsan iyi bir tercih.
+//0 -> dan kaldırılan elementin yerine yeni bir element koyulabilir.
+// class CircularQueue {
+//   constructor(capacity) {
+//     this.items = new Array(capacity);
+//     this.capacity = capacity;
+//     this.currentLength = 0;
+//     this.rear = -1;
+//     this.front = -1;
+//   }
+//   isFull() {
+//     return this.currentLength === this.capacity;
+//   }
+//   isEmpty() {
+//     return this.currentLength === 0;
+//   }
+//   //rear -> 3
+//   //capacity -> 5
+//   // (3 + 1) % 5 = 4
+//   enqueue(element) {
+//     if (!this.isFull()) {
+//       this.rear = (this.rear + 1) % this.capacity;
+//       this.items[this.rear] = element;
+//       this.currentLength += 1;
+//       if (this.front === -1) {
+//         this.front = this.rear;
+//       }
+//     }
+//   }
+//   dequeue() {
+//     if (this.isEmpty()) {
+//       return null;
+//     }
+//     const item = this.items[this.front];
+//     this.items[this.front] = null;
+//     this.front = (this.front + 1) % this.capacity;
+//     this.currentLength -= 1;
+//     if (this.isEmpty()) {
+//       this.front = -1;
+//       this.rear = -1;
+//     }
+//     return item;
+//   }
+//   peek() {
+//     if (!this.isEmpty()) {
+//       return this.items[this.front];
+//     }
+//     return null;
+//   }
+//   print() {
+//     if (this.isEmpty) {
+//       console.log("Que is empty");
+//     } else {
+//       let i;
+//       let str = "";
+//       for (i = this.front; i !== this.rear; i = (i + 1) % this.capacity) {
+//         str += this.items[i] + " ";
+//       }
+//       str += this.items[i];
+//       console.log(str);
+//     }
+//   }
+// }
